@@ -1,0 +1,60 @@
+.titulo {
+	font-family: helvetica;
+	font-size: 70px;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+button {
+	border-radius:7px;
+	cursor:pointer;
+	font-family: verdana;
+	font-weight:bold;
+	color: white;
+	font-size:15px;
+	padding:10px 15px;
+	border:1px solid #3272d1;
+	margin-left: 20px;
+	background-color: #538ad9;
+}
+
+#tabela {
+  	border-collapse: collapse;
+  	width: 100%;
+}
+
+#tabela td, #tabela th {
+  	padding: 8px;
+}
+
+#tabela th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #000000;
+  color: white;
+}
+
+body {
+	font-family: verdana;
+}
+
+.campoEntrada{
+	padding-top: 12px;
+	padding-bottom: 12px;
+	padding-left: 20px;
+	margin-top: 10px;
+	width: 100%;
+	border:1px solid;
+	border-radius:7px;
+}
+
+.button-salvar{
+	background-color: #00c655;
+	border:1px solid #00a355;
+}
+
+.button-cancelar{
+	background-color: #ec1c23;
+	border:1px solid #c61c23;
+}

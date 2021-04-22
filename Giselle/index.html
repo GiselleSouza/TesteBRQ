@@ -1,0 +1,69 @@
+<html ng-app="cadastro">
+<meta charset="UTF-8">
+<head>
+	<title>Cadastro de PET</title>
+	<script src="lib/angular/angular.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/app.css">
+	<script src="js/app.js"></script>
+	<script src="js/controllers/cadastroCtrl.js"></script>
+	<script>
+		
+	</script>
+</head>
+<body ng-controller="cadastroCtrl">
+	<h3 class="titulo">{{titulo}}</h3>
+	<button ng-model="clicado" ng-click="clicado = true" ng-show="!isPetSelecionado(pets)">Cadastrar PET</button>
+	<button no-model="editado" ng-click="editarPet(pets); clicado = true; editado=true" ng-show="isPetSelecionado(pets)">Editar cadastro</button>
+	<button ng-click="removerPet(pets)" ng-show="isPetSelecionado(pets)">Remover PET</button>
+
+	<div ng-show="editado==true">
+		<br>
+		Editar as informações!
+		<br>
+	</div>
+
+	<div ng-show="clicado==true">
+		<form name = "divForm">
+			<hr style="color: #ffffff">	
+			<br>
+			Nome: 
+			<input type="text" id="idNome" name="nome" ng-model="pet.nome" placeholder="Digite aqui o nome do PET" class="campoEntrada" ng-required="true"></input>
+			<br><br>
+			Animal: 
+			<select class="campoEntrada" id="idAnimal" ng-model="pet.animal" ng-options="animal for animal in animais"><option value="" ng-required="true">Selecione um animal</option></select>
+			<br><br>
+			Raça: 
+			<input type="text" id="idRaca" name="raca" ng-model="pet.raca" placeholder="Digite aqui a raça do PET" class="campoEntrada" ng-required="true"></input>
+			<br><br>
+			Sexo: 
+			<input type="radio" name="sexo" ng-model="pet.sexo" id="macho" name="sexo" value="Macho" ng-required="true">
+			<label for="male">Macho</label>
+			<input type="radio" name="sexo" ng-model="pet.sexo" id="femea" name="sexo" value="Fêmea" ng-required="true">
+			<label for="femea">Fêmea</label>
+			<br><br>
+		</form>
+
+		<button ng-click="removerPet(pets); adicionarPet(pet); clicado = false; editado = false" class="button-salvar" ng-disabled="divForm.$invalid">Salvar</button>
+		<button ng-click="cancelar(pet); clicado = false; editado = false" class="button-cancelar">Cancelar</button>
+	</div>
+
+	<hr style="color: #ffffff">
+	<table id="tabela">
+		<tr>
+			<th></th>
+			<th>Nome</th>
+			<th>Animal</th>
+			<th>Raça</th>
+			<th>Sexo</th>
+		</tr>
+
+		<tr ng-repeat="pet in pets">
+			<td><input type="checkbox" id="idSelecionado" ng-model="pet.selecionado"/></td>
+			<td>{{pet.nome}}</td>
+			<td>{{pet.animal}}</td>
+			<td>{{pet.raca}}</td>
+			<td>{{pet.sexo}}</td>
+		</tr>
+	</table>
+</body>
+</html>
