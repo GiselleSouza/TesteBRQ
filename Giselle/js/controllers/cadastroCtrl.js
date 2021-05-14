@@ -1,26 +1,18 @@
-// var array;
-		// var cont=0;
+var array = [];
+var elementos;
 
-		// for(var i = 0; i < localStorage.length; i++){
-		// 	$scope.pets.push([localStorage.getItem(i)]);
-		// }
+for(var i = 0; i < localStorage.length; i++){
+	elementos = localStorage.key(i);
+}
 
-var array = [{nome: "Ágatha", animal: "Gato", raca: "Sem raça", sexo: "Fêmea"},
-			{nome: "Hulk", animal: "Cachorro", raca: "Labrador", sexo: "Macho"},
-			{nome: "Hamtaro", animal: "Hamster", raca: "Sem raça", sexo: "Macho"}];
-var cont = localStorage.length;
-console.log(localStorage.length);
+for(var i = 0; i <= elementos; i++){
+	if(localStorage.getItem(i)!=null) array.push(JSON.parse(localStorage.getItem(i)));
+}
 
 angular.module("cadastro").controller("cadastroCtrl", function($scope){
 	$scope.titulo = "PET";
-	$scope.pets = [
-		array[0], array[1], array[2]
-	];
+	$scope.pets = array;
 	$scope.animais = ["Cachorro", "Coelho", "Gato", "Hamster"];
-
-	localStorage.setItem(0, JSON.stringify(array[0]));
-	localStorage.setItem(1, JSON.stringify(array[1]));
-	localStorage.setItem(2, JSON.stringify(array[2]));
 
 	$scope.isPetSelecionado = function(pets){
 		return pets.some(function (pet){
@@ -30,9 +22,9 @@ angular.module("cadastro").controller("cadastroCtrl", function($scope){
 	$scope.removerPet = function(pets){
 		$scope.pets = pets.filter(function (pet){
 			if (pet.selecionado){
-				for(var i=0; i<=localStorage.length;i++){
+				for(var i = 0; i <= elementos; i++){
 					var petString = '{"nome":"' + pet.nome + '","animal":"' + pet.animal + '","raca":"' + pet.raca + '","sexo":"' + pet.sexo + '"}';
-					
+	
 					if(petString == localStorage.getItem(i)){
 						localStorage.removeItem(i);
 					}
@@ -45,12 +37,16 @@ angular.module("cadastro").controller("cadastroCtrl", function($scope){
 		});
 	};
 	$scope.adicionarPet = function(pet){
+		elementos++;
 		$scope.pets.push(angular.copy(pet));
-		localStorage.setItem(cont, JSON.stringify(pet));
-		cont++;
+		localStorage.setItem(elementos, JSON.stringify(pet));
 		delete $scope.pet;
 	};
 	$scope.cancelar = function(pet){
+		//tentei essa alteração conforme orientação, mas diz que a propriedade nome não está definida
+		//tentei mandar pets ao invés de pet. aí vem definido, pelo menos. mas 'nome' continua não definido.
+		//pet.nome = "";
+		console.log(pet);
 		document.getElementById("idNome").value = " ";
 		document.getElementById("idAnimal").selectedIndex = 0;
 		document.getElementById("idRaca").value = " ";
